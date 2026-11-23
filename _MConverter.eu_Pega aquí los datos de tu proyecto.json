@@ -1,0 +1,5 @@
+// Pega aquí los datos de tu proyecto de Supabase (Project Settings > API). Usa SOLO la clave anon/public.
+window.APP_CONFIG = {
+  SUPABASE_URL: "https://kimdoowkfscsqwjeirjq.supabase.co/rest/v1/",
+  SUPABASE_ANON_KEY: "sb_publishable_yE3Ptl23eNa3SWtPVuDL6g_5n2imjo4"
+};

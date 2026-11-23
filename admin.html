@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
+<title>Panel · Operativo Cumpleaños de Gera</title>
+<style>
+body{margin:0;font:16px/1.45 system-ui,sans-serif;background:#f4f2f8;color:#1a1030}
+main{max-width:1000px;margin:0 auto;padding:1rem}
+h1{font-size:1.4rem}h2{font-size:1.1rem;margin:.2rem 0 .6rem}
+.box{background:#fff;border:1px solid #d8d3e6;border-radius:10px;padding:1rem;margin-bottom:1rem}
+.hl{border:3px solid #e8412e}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.6rem}
+.cards div{background:#f4f2f8;border-radius:8px;padding:.6rem}.cards b{display:block;font-size:1.6rem}
+button,select,input{font:inherit;padding:.45rem .7rem;border:1px solid #8b84a8;border-radius:8px;background:#fff}
+button{cursor:pointer;background:#1a1030;color:#fff;border-color:#1a1030}button.s{background:#fff;color:#1a1030}
+.bar{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:.7rem}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;min-width:640px}
+th,td{text-align:left;padding:.5rem;border-bottom:1px solid #e5e1ef;vertical-align:middle}
+.rev{background:#ffe45c;border-radius:5px;padding:0 .4rem;font-size:.8rem}
+.err{color:#b0160a;font-weight:600}a.wa{color:#0a7d3b;font-weight:600}
+</style></head><body><main>
+<h1>Operativo Cumpleaños de Gera · Panel privado</h1>
+<div id="login" class="box"><h2>Iniciar sesión</h2>
+<form id="lf" class="bar"><input id="em" type="email" placeholder="Correo" autocomplete="username" required><input id="pw" type="password" placeholder="Contraseña" autocomplete="current-password" required><button>Entrar</button></form><p id="le" class="err"></p></div>
+<div id="app" hidden>
+<div class="bar"><button class="s" id="out">Cerrar sesión</button></div>
+<div class="box hl"><h2>OPERATIVO DE SEGUIMIENTO – 27 DE NOVIEMBRE</h2>
+<div class="cards" id="cards"></div>
+<p><button id="seePend">Ver solo pendientes para contactarlos</button></p></div>
+<div class="box"><div class="bar">
+<select id="flt"><option value="todos">Todos</option><option value="confirmado">Confirmados</option><option value="no_asistira">No asistirán</option><option value="pendiente">Pendientes</option><option value="review">Por revisar</option></select>
+<input id="q" type="search" placeholder="Buscar por nombre">
+<button class="s" id="exp">Descargar CSV (según filtro)</button></div>
+<div class="tw"><table><thead><tr><th>Invitado</th><th>Estado</th><th>Acompañante</th><th>Respuesta</th><th></th></tr></thead><tbody id="tb"></tbody></table></div></div>
+<div class="box"><h2>Agregar invitados</h2>
+<form id="af" class="bar"><input id="an" placeholder="Nombre" required><input id="ap" placeholder="WhatsApp (opcional)" inputmode="tel"><button>Agregar</button></form>
+<p>Importar CSV (columnas: nombre,telefono): <input type="file" id="csv" accept=".csv,text/csv"></p><p id="ae" class="err"></p></div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script src="config.js"></script>
+<script>
+var sb = supabase.createClient(APP_CONFIG.SUPABASE_URL, APP_CONFIG.SUPABASE_ANON_KEY), G = [];
+var MSG = "¡Hola! Oye, estoy organizando lo de mi cumpleaños del 5 de diciembre y estoy cerrando la lista de invitados. ¿Me puedes confirmar si vas a poder venir? Recuerda que la fecha límite es el 30 de noviembre. ¡Espero verte!";
+var LBL = { pendiente: "Pendiente", confirmado: "Confirmado", no_asistira: "No asistirá" };
+function $(i){ return document.getElementById(i); }
+function esc(s){ return String(s == null ? "" : s).replace(/[&<>"']/g, function(c){ return "&#" + c.charCodeAt(0) + ";"; }); }
+function fdate(d){ return d ? new Date(d).toLocaleString("es-MX", { dateStyle: "medium", timeStyle: "short" }) : "—"; }
+function show(on){ $("login").hidden = on; $("app").hidden = !on; }
+async function load(){
+  var r = await sb.from("guests").select("*").order("name");
+  if (r.error){ $("ae").textContent = "Error al cargar: " + r.error.message; return; }
+  G = r.data; draw();
+}
+function filtered(){
+  var f = $("flt").value, q = $("q").value.trim().toLowerCase();
+  return G.filter(function(g){
+    var ok = f === "todos" ? !g.needs_review : f === "review" ? g.needs_review : (g.status === f && !g.needs_review);
+    return ok && (!q || g.name.toLowerCase().indexOf(q) > -1);
+  });
+}
+function draw(){
+  var ok = G.filter(function(g){ return !g.needs_review; });
+  var c = ok.filter(function(g){ return g.status === "confirmado"; }), n = ok.filter(function(g){ return g.status === "no_asistira"; });
+  var p = ok.filter(function(g){ return g.status === "pendiente"; }), a = c.filter(function(g){ return g.companion_name; }).length;
+  var rv = G.length - ok.length;
+  $("cards").innerHTML = [["Invitados registrados", ok.length], ["Confirmados", c.length], ["No asistirán", n.length], ["Pendientes", p.length], ["Acompañantes", a], ["Total estimado de asistentes", c.length + a], ["Por revisar", rv]]
+    .map(function(x){ return "<div><b>" + x[1] + "</b>" + x[0] + "</div>"; }).join("");
+  $("tb").innerHTML = filtered().map(function(g){
+    var wa = "";
+    if (g.phone){ var d = g.phone.replace(/\D/g, ""); if (d.length === 10) d = "52" + d;
+      wa = '<a class="wa" target="_blank" rel="noopener" href="https://wa.me/' + d + "?text=" + encodeURIComponent(MSG) + '">WhatsApp</a> '; }
+    var st = "<select data-st='" + g.id + "'>" + Object.keys(LBL).map(function(k){ return "<option value='" + k + "'" + (g.status === k ? " selected" : "") + ">" + LBL[k] + "</option>"; }).join("") + "</select>";
+    return "<tr><td>" + esc(g.name) + (g.needs_review ? ' <span class="rev">por revisar</span>' : "") + (g.comments ? "<br><small>" + esc(g.comments) + "</small>" : "") + "</td><td>" + st + "</td><td>" + (g.companion_name ? esc(g.companion_name) : "—") + "</td><td>" + fdate(g.responded_at) + "</td><td>" + wa +
+      (g.needs_review ? "<button class='s' data-ok='" + g.id + "'>Aprobar</button> " : "") + "<button class='s' data-ren='" + g.id + "'>Editar</button> <button class='s' data-del='" + g.id + "'>Borrar</button></td></tr>";
+  }).join("") || "<tr><td colspan='5'>Sin registros.</td></tr>";
+}
+async function upd(id, v){ var r = await sb.from("guests").update(v).eq("id", id); if (r.error) alert(r.error.message); load(); }
+$("tb").addEventListener("change", function(e){ var id = e.target.dataset.st; if (id){ var v = e.target.value; upd(id, { status: v, responded_at: v === "pendiente" ? null : new Date().toISOString() }); } });
+$("tb").addEventListener("click", async function(e){
+  var t = e.target, g;
+  if (t.dataset.ok) upd(t.dataset.ok, { needs_review: false });
+  if (t.dataset.ren){ g = G.find(function(x){ return x.id === t.dataset.ren; }); var nn = prompt("Nombre del invitado:", g.name); if (nn && nn.trim().length > 1) upd(g.id, { name: nn.trim() }); }
+  if (t.dataset.del){ g = G.find(function(x){ return x.id === t.dataset.del; }); if (confirm("¿Borrar a " + g.name + "?")){ await sb.from("guests").delete().eq("id", g.id); load(); } }
+});
+$("flt").onchange = $("q").oninput = draw;
+$("seePend").onclick = function(){ $("flt").value = "pendiente"; draw(); $("tb").scrollIntoView(); };
+$("af").onsubmit = async function(e){ e.preventDefault(); $("ae").textContent = "";
+  var r = await sb.from("guests").insert({ name: $("an").value.trim(), phone: $("ap").value.trim() || null });
+  if (r.error) $("ae").textContent = r.error.code === "23505" ? "Ese invitado ya existe." : r.error.message; else { $("af").reset(); load(); } };
+$("csv").onchange = async function(e){
+  var f = e.target.files[0]; if (!f) return; var rows = (await f.text()).split(/\r?\n/).map(function(l){ return l.split(","); })
+    .filter(function(c){ return c[0] && c[0].trim().length > 1 && c[0].trim().toLowerCase() !== "nombre"; })
+    .map(function(c){ return { name: c[0].trim().replace(/^"|"$/g, ""), phone: (c[1] || "").trim() || null }; });
+  var r = await sb.from("guests").upsert(rows, { onConflict: "name_norm", ignoreDuplicates: true });
+  $("ae").textContent = r.error ? r.error.message : "Importados: " + rows.length + " (los repetidos se omiten)."; e.target.value = ""; load(); };
+$("exp").onclick = function(){
+  var q = function(s){ return '"' + String(s == null ? "" : s).replace(/"/g, '""') + '"'; };
+  var l = [["Invitado", "Estado", "Acompañante", "Telefono", "Comentarios", "Respuesta"].join(",")].concat(filtered().map(function(g){
+    return [q(g.name), q(LBL[g.status]), q(g.companion_name), q(g.phone), q(g.comments), q(g.responded_at || "")].join(","); }));
+  var a = document.createElement("a"); a.href = URL.createObjectURL(new Blob(["\ufeff" + l.join("\r\n")], { type: "text/csv;charset=utf-8" }));
+  a.download = "invitados-" + $("flt").value + ".csv"; a.click(); };
+$("lf").onsubmit = async function(e){ e.preventDefault();
+  var r = await sb.auth.signInWithPassword({ email: $("em").value, password: $("pw").value });
+  if (r.error) $("le").textContent = "No se pudo iniciar sesión."; else { show(true); load(); } };
+$("out").onclick = async function(){ await sb.auth.signOut(); G = []; show(false); };
+sb.auth.getSession().then(function(r){ if (r.data.session){ show(true); load(); } });
+</script></main></body></html>

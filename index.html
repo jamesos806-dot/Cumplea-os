@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Operativo Cumpleaños de Gera</title>
+<meta name="description" content="Última hora: Gera cumple años. Confirma tu asistencia antes del 30 de noviembre."><meta property="og:type" content="website"><meta property="og:title" content="¡ÚLTIMA HORA! GERA CUMPLE AÑOS"><meta property="og:description" content="Interrumpimos nuestra programación: estás invitado. Sábado 5 de diciembre, 3:00 PM."><meta property="og:image" content="https://TU-DOMINIO.vercel.app/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image">
+<link href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--red:#e8412e;--yel:#ffd23f;--blu:#1f4fd8;--grn:#25b06f;--card:#d9b382;--ink:#1a1030;--paper:#fff4dc;--bg:#2a1a4a;--tx:#fff4dc;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1b0f33;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#1b0f33;color-scheme:dark}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--tx);font:400 1.05rem/1.5 Rubik,system-ui,sans-serif;padding-bottom:64px}
+h1,h2,h3,.disp{font-family:"Bowlby One",Impact,system-ui,sans-serif;font-weight:400;line-height:1.05;margin:0}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--yel);outline-offset:3px}
+.btn{font:400 1.15rem "Bowlby One",Impact,sans-serif;background:var(--yel);color:var(--ink);border:4px solid var(--ink);border-radius:14px;padding:.9rem 1.4rem;box-shadow:5px 5px 0 var(--red);cursor:pointer;text-decoration:none;display:inline-block;text-align:center}
+.btn:active{transform:translate(3px,3px);box-shadow:2px 2px 0 var(--red)}
+/* INTRO */
+#intro{position:fixed;inset:0;z-index:50;background:#0b0b10;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.2rem;padding:1.5rem;text-align:center;overflow:hidden;transition:opacity .5s,transform .5s}
+#intro.off{opacity:0;transform:scale(1.2);pointer-events:none}
+.noise{position:absolute;inset:-50%;opacity:.35;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");animation:jit .25s steps(4) infinite}
+@keyframes jit{25%{transform:translate(-3%,2%)}50%{transform:translate(2%,-3%)}75%{transform:translate(3%,3%)}}
+.scan{position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,#0000 0 2px,#0006 2px 4px);z-index:2}
+#intro>*:not(.noise):not(.scan){position:relative;z-index:3}
+.live{background:var(--red);color:#fff;font:700 .95rem Rubik,sans-serif;padding:.3rem .8rem;border-radius:6px;letter-spacing:.08em}
+.live::before{content:"";display:inline-block;width:.6em;height:.6em;background:#fff;border-radius:50%;margin-right:.5em;animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:0}}
+#intro h1{font-size:clamp(2.4rem,11vw,4.5rem);color:var(--yel);text-shadow:3px 0 var(--red),-3px 0 var(--blu);animation:glitch 2.5s infinite}
+@keyframes glitch{0%,92%,100%{transform:none}94%{transform:translateX(-6px) skewX(8deg)}96%{transform:translateX(6px)}}
+#intro p{max-width:26ch;margin:0;font-weight:700;font-size:1.15rem;color:#fff}
+#intro p.last{color:var(--yel)}
+.curtain{position:fixed;top:0;bottom:0;width:50%;z-index:60;background:var(--red);transition:transform .7s cubic-bezier(.7,0,.3,1);pointer-events:none}
+.curtain.l{left:0;transform:translateX(-101%)}.curtain.r{right:0;background:var(--blu);transform:translateX(101%)}
+body.wipe .curtain{transform:none}
+/* TOP BAR */
+.top{position:sticky;top:0;z-index:20;display:flex;justify-content:space-between;align-items:center;gap:.5rem;padding:.5rem .9rem;padding-top:calc(.5rem + env(safe-area-inset-top,0px));background:var(--ink);border-bottom:4px solid var(--yel)}
+.top b{font-family:"Bowlby One",Impact,sans-serif;font-weight:400;font-size:.95rem}
+.top nav{display:flex;gap:.9rem;font-size:.9rem;font-weight:500}
+@media(max-width:520px){.top nav{display:none}}
+/* SECTIONS */
+section{padding:3rem 1.1rem;max-width:900px;margin:0 auto}
+.paper{background:var(--paper);color:var(--ink);border:4px solid var(--ink);border-radius:6px;padding:1.3rem;box-shadow:8px 8px 0 #0006;background-image:repeating-linear-gradient(0deg,#0000 0 27px,#1a103014 27px 28px)}
+.card{background:var(--card);color:var(--ink);background-image:radial-gradient(#0001 1px,#0000 1.5px);background-size:6px 6px}
+h2{font-size:clamp(1.7rem,7vw,2.6rem);color:var(--yel);margin-bottom:1.2rem;text-shadow:3px 3px 0 var(--red)}
+.stage{background:var(--card);background-image:repeating-linear-gradient(90deg,#0000 0 22px,#0001 22px 24px);border:5px solid var(--ink);border-radius:12px;padding:1rem;position:relative;color:var(--ink)}
+.screen{background:var(--blu);color:#fff;border:6px solid var(--ink);border-radius:18px;padding:1.2rem 1rem 3.4rem;position:relative;overflow:hidden}
+.screen::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,#0000 0 2px,#0003 2px 4px);pointer-events:none}
+.screen h2{color:#fff;text-shadow:3px 3px 0 var(--ink);margin:.6rem 0 0;font-size:clamp(1.5rem,6.2vw,2.3rem)}
+.lower{position:absolute;left:0;right:0;bottom:0;background:var(--red);color:#fff;font-weight:700;padding:.5rem 1rem;z-index:2;animation:slide .8s .3s both}
+@keyframes slide{from{transform:translateX(-100%)}}
+.onair{display:inline-block;background:var(--red);color:#fff;font:700 .85rem Rubik,sans-serif;padding:.2rem .7rem;border-radius:5px;letter-spacing:.08em}
+.news{display:grid;gap:.8rem;margin-top:1rem;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.news article{background:var(--paper);color:var(--ink);border:3px solid var(--ink);border-radius:8px;padding:.8rem;font-weight:500}
+.news article:nth-child(odd){transform:rotate(-1deg)}.news article:nth-child(even){transform:rotate(1deg)}
+.news article::before{content:"NOTICIA";display:block;font:700 .7rem Rubik,sans-serif;color:var(--red);margin-bottom:.2rem}
+dl{display:grid;grid-template-columns:auto 1fr;gap:.7rem 1rem;margin:0 0 1.2rem}
+dt{font-weight:700;color:var(--red)}dd{margin:0}
+.stamp{display:inline-block;border:4px solid var(--red);color:var(--red);font:400 1.2rem "Bowlby One",Impact,sans-serif;padding:.1rem .6rem;transform:rotate(-6deg);margin-bottom:1rem}
+.agenda{list-style:none;padding:0;margin:0 0 1.5rem;display:grid;gap:.7rem;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.agenda li{background:var(--grn);color:var(--ink);font:400 1.1rem "Bowlby One",Impact,sans-serif;border:4px solid var(--ink);border-radius:10px;padding:.9rem}
+.warn{border-left:10px solid var(--yel);background:var(--ink);padding:.8rem 1rem;margin-bottom:.8rem;border-radius:6px}
+.warn h3{font-size:1.1rem;color:var(--yel);margin-bottom:.3rem}.warn p{margin:0}
+form{display:grid;gap:1rem}
+fieldset{border:0;padding:0;margin:0}legend,label{font-weight:700;display:block;margin-bottom:.3rem}
+input[type=text],textarea{width:100%;font:inherit;padding:.7rem;border:3px solid var(--ink);border-radius:8px;background:#fff;color:var(--ink)}
+.opts{display:flex;gap:.6rem}.opts label{display:flex;align-items:center;gap:.4rem;border:3px solid var(--ink);border-radius:8px;padding:.6rem 1rem;margin:0;background:#fff;cursor:pointer;font-weight:500}
+.opts input{width:1.2rem;height:1.2rem;accent-color:var(--red)}
+.err{color:#b0160a;font-weight:700;min-height:1.2em;margin:.25rem 0 0;font-size:.95rem}
+#acomp[hidden],#nomAcomp[hidden]{display:none}
+.demo{background:var(--yel);border:3px dashed var(--ink);padding:.6rem .8rem;border-radius:8px;font-size:.95rem;font-weight:500}
+#msg{font-weight:700;padding:.8rem;border-radius:8px;border:3px solid var(--ink)}#msg.ok{background:#b8f0cf}#msg.bad{background:#ffc9c2}#msg:empty{display:none}
+.end{text-align:center}.end .disp{font-size:clamp(1.3rem,5.5vw,2rem);color:var(--yel)}
+.end p{max-width:34ch;margin:1rem auto}
+.flash{background:var(--ink);border:3px solid var(--yel);border-radius:8px;padding:.8rem 1rem;margin-bottom:.4rem}.flash p{margin:.5rem 0 0;font-weight:500}
+.proto{list-style:none;padding:0;margin:1.2rem 0 0;display:grid;gap:.8rem;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.proto li{background:var(--paper);color:var(--ink);border:4px solid var(--ink);border-radius:10px;padding:1rem;box-shadow:5px 5px 0 #0006}
+.proto h3{font-size:1.2rem;margin:.5rem 0 .3rem}.proto p{margin:0}
+.tag{display:inline-block;font:700 .75rem Rubik,sans-serif;letter-spacing:.06em;padding:.15rem .6rem;border-radius:5px;border:2px solid var(--ink)}
+.tag.vol{background:var(--grn)}.tag.need{background:var(--red);color:#fff}.tag.inf{background:var(--yel)}
+/* TICKER + AUDIO */
+.ticker{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--red);color:#fff;border-top:4px solid var(--ink);overflow:hidden;padding:.45rem 0;padding-bottom:calc(.45rem + env(safe-area-inset-bottom,0px));font-weight:700;white-space:nowrap}
+.ticker div{display:inline-block;animation:tick 55s linear infinite}
+@keyframes tick{to{transform:translateX(-50%)}}
+.audio{position:fixed;right:.7rem;bottom:calc(58px + env(safe-area-inset-bottom,0px));z-index:31;display:flex;align-items:center;gap:.5rem;background:var(--ink);border:3px solid var(--yel);border-radius:999px;padding:.3rem .6rem}
+.audio button{background:none;border:0;color:var(--tx);font:700 .9rem Rubik,sans-serif;cursor:pointer;padding:.3rem}
+.audio input{width:80px;accent-color:var(--yel)}
+.rv{opacity:0;transform:translateY(24px);transition:.6s}.rv.in{opacity:1;transform:none}
+body.noanim .rv{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<div id="intro" role="dialog" aria-modal="true" aria-labelledby="introT">
+  <div class="noise"></div><div class="scan"></div>
+  <span class="live">EN VIVO</span>
+  <h1 id="introT">¡ATENCIÓN! ¡ATENCIÓN!</h1>
+  <p>INTERRUMPIMOS NUESTRA PROGRAMACIÓN POR UN ACONTECIMIENTO DE EXTREMA IMPORTANCIA.</p>
+  <p class="last">ÚLTIMA HORA: GERA CUMPLE AÑOS. LAS AUTORIDADES SOLICITAN LA PRESENCIA DE TODOS LOS TESTIGOS.</p>
+  <button class="btn" id="enter">VER TRANSMISIÓN ESPECIAL</button>
+</div>
+<div class="curtain l"></div><div class="curtain r"></div>
+
+<div id="app" inert>
+<header class="top"><b>OPERATIVO CUMPLEAÑOS DE GERA</b>
+  <nav><a href="#info">Ubicación</a><a href="#agenda">Agenda</a><a href="#protocolo">Protocolo</a><a href="#rsvp">Confirmar</a></nav>
+  <span class="live">EN VIVO</span></header>
+
+<main>
+<section id="noticiero" class="rv">
+  <div class="stage">
+    <div class="screen">
+      <span class="onair">AL AIRE</span>
+      <h2>¡CONFIRMADO! GERA CELEBRARÁ SU CUMPLEAÑOS Y TÚ HAS SIDO SELECCIONADO PARA ASISTIR.</h2>
+      <div class="lower">ÚLTIMA HORA · SÁBADO 5 DE DICIEMBRE · 3:00 PM</div>
+    </div>
+    <div class="news">
+      <article>Fuentes cercanas aseguran que habrá pizza.</article>
+      <article>Expertos confirman que se realizarán actividades de dudosa seriedad.</article>
+      <article>El departamento de logística solicita confirmar asistencia para evitar una crisis de pizza.</article>
+      <article>Las autoridades meteorológicas recomiendan llevar suéter.</article>
+    </div>
+  </div>
+</section>
+
+<section id="info" class="rv">
+  <h2>EXPEDIENTE CLASIFICADO</h2>
+  <div class="paper">
+    <span class="stamp">CONFIDENCIAL</span>
+    <dl>
+      <dt>Fecha</dt><dd>Sábado 5 de diciembre de 2026</dd>
+      <dt>Hora</dt><dd>3:00 PM</dd>
+      <dt>Dirección</dt><dd>Mapimí 69, Colonia Valle Gómez, Ciudad de México</dd>
+      <dt>Metro cercano</dt><dd>Valle Gómez y Misterios</dd>
+    </dl>
+    <a class="btn" id="mapa" href="https://maps.app.goo.gl/cXNroTXt869ouPk18" target="_blank" rel="noopener">CONSULTAR UBICACIÓN</a>
+  </div>
+</section>
+
+<section id="agenda" class="rv">
+  <h2>LO QUE SUCEDERÁ DURANTE ESTA TRANSMISIÓN</h2>
+  <ul class="agenda"><li>Juegos y actividades</li><li>Pizza para los asistentes</li><li>Agua de sabor</li><li>Convivencia y celebración</li></ul>
+  <div class="warn"><h3>ADVERTENCIA METEOROLÓGICA</h3><p>El departamento del clima informa que existe una alta probabilidad de frío en la azotea. Se recomienda portar prendas abrigadoras.</p></div>
+  <div class="warn"><h3>INFORMACIÓN SOBRE BEBIDAS</h3><p>La organización no proporcionará bebidas alcohólicas. Quien quiera beber puede traer las suyas.</p></div>
+  <div class="warn"><h3>REGLAMENTO DE INVITADOS</h3><p>Cada invitación contempla al invitado y un acompañante como máximo.</p></div>
+</section>
+
+<section id="protocolo" class="rv">
+  <h2>PROTOCOLO DE SUPERVIVENCIA PARA EL OPERATIVO CUMPLEAÑOS</h2>
+  <div class="flash"><span class="onair">¡ATENCIÓN, CIUDADANOS!</span><p>La organización solicita la colaboración de todos para evitar gastos innecesarios y reducir el uso de desechables.</p></div>
+  <div class="news">
+    <article>ÚLTIMA HORA: Se solicita a la población civil traer su propio banquito. Las autoridades no garantizan disponibilidad de asientos.</article>
+    <article>ALERTA AMBIENTAL: Por disposición del departamento ecológico, queda suspendida la compra de platos y vasos desechables. ¡Trae los tuyos!</article>
+    <article>REPORTE ESPECIAL: Los ciudadanos que aporten un banquito serán considerados héroes nacionales.</article>
+  </div>
+  <ul class="proto">
+    <li><span class="tag vol">VOLUNTARIO</span><h3>Asientos</h3><p>Si tienes un banquito, silla plegable o asiento portátil que puedas traer, será de gran ayuda. No habrá renta de sillas, así que agradecemos cualquier aportación. Si no puedes llevar uno, no pasa nada.</p></li>
+    <li><span class="tag need">NECESARIO</span><h3>Platos y vasos</h3><p>Cada invitado debe traer su propio plato y vaso reutilizables. No compraremos platos ni vasos desechables.</p></li>
+    <li><span class="tag inf">INFORMATIVO</span><h3>Comida</h3><p>Habrá pizza para compartir.</p></li>
+    <li><span class="tag inf">INFORMATIVO</span><h3>Bebidas</h3><p>Habrá agua de sabor. Si quieres tomar alcohol, puedes traer tus propias bebidas.</p></li>
+    <li><span class="tag inf">INFORMATIVO</span><h3>Clima</h3><p>La fiesta será en una azotea. ¡No olvides tu suéter!</p></li>
+  </ul>
+</section>
+
+<section id="rsvp" class="rv">
+  <h2>¿CUÁL ES TU DECLARACIÓN ANTE EL DEPARTAMENTO DE EVENTOS?</h2>
+  <div class="paper">
+    <p class="demo">Fecha límite para confirmar: lunes 30 de noviembre de 2026.</p>
+    <form id="rsvpForm" novalidate>
+      <div><label for="nombre">Nombre completo</label><input type="text" id="nombre" autocomplete="name"><p class="err" id="e-nombre" aria-live="polite"></p></div>
+      <fieldset><legend>¿Asistirás?</legend>
+        <div class="opts"><label><input type="radio" name="asiste" value="si">Sí</label><label><input type="radio" name="asiste" value="no">No</label></div><p class="err" id="e-asiste" aria-live="polite"></p></fieldset>
+      <fieldset id="acomp" hidden><legend>¿Llevarás acompañante? (máximo uno)</legend>
+        <div class="opts"><label><input type="radio" name="acomp" value="si">Sí</label><label><input type="radio" name="acomp" value="no">No</label></div><p class="err" id="e-acomp" aria-live="polite"></p></fieldset>
+      <div id="nomAcomp" hidden><label for="nombreAcomp">Nombre del acompañante</label><input type="text" id="nombreAcomp"><p class="err" id="e-nombreAcomp" aria-live="polite"></p></div>
+      <div><label for="coment">Comentarios adicionales (opcional)</label><textarea id="coment" rows="3"></textarea></div>
+      <input id="hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px"><button class="btn" type="submit">ENVIAR DECLARACIÓN</button>
+      <p id="msg" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+
+<section id="cierre" class="end rv">
+  <p class="disp">ESTA TRANSMISIÓN ESPECIAL HA SIDO APROBADA POR EL DEPARTAMENTO DE EVENTOS Y CELEBRACIONES.</p>
+  <p>TU PRESENCIA PODRÍA CAMBIAR EL CURSO DE LA HISTORIA. O AL MENOS AYUDAR A QUE GERA SEPA CUÁNTAS PIZZAS PEDIR.</p>
+  <a class="btn" href="#rsvp">CONFIRMAR MI ASISTENCIA</a>
+  <p>Fecha límite para confirmar: lunes 30 de noviembre de 2026.</p>
+</section>
+</main>
+</div>
+
+<div class="audio" id="audio" hidden>
+  <button id="mute" aria-pressed="true">♪ Música: sí</button>
+  <input type="range" id="vol" min="0" max="100" value="50" aria-label="Volumen">
+</div>
+<div class="ticker" aria-hidden="true"><div id="tk"></div></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script><script src="config.js"></script>
+<script>
+/* ===== Configuración ===== */
+var CFG = { audioSrc: "" }; // Para usar tu propia música: pon aquí la ruta o URL de un MP3/WAV
+
+/* ===== Capa de servicios (fase 2: reemplazar por Supabase) ===== */
+var RsvpService = {
+  save: function(r){
+    var c = window.__sb || (window.__sb = supabase.createClient(APP_CONFIG.SUPABASE_URL, APP_CONFIG.SUPABASE_ANON_KEY));
+    return c.rpc("submit_rsvp",{p_name:r.nombre,p_attends:r.asiste,p_companion:r.acompanante,p_companion_name:r.nombreAcompanante,p_comments:r.comentarios,p_hp:document.getElementById("hp").value}).then(function(x){ if(x.error) throw x.error; return {ok:true}; });
+  }
+};
+var AdminAuth = { /* fase 2: autenticación del panel administrativo */ };
+
+var $ = function(s){ return document.querySelector(s); };
+
+/* ===== Ticker ===== */
+var heads = ["ÚLTIMA HORA: se espera pizza en cantidades históricas","Autoridades confirman que el frío en la azotea es real","Testigos reportan ganas incontrolables de celebrar","Departamento de banquitos en alerta máxima","Agua de sabor: la oposición no tiene propuestas","Se recuerda a la población que el lunes 30 vence el plazo para confirmar","Juegos de dudosa seriedad avanzan según lo previsto"];
+var t = heads.join("   ★   ") + "   ★   ";
+$("#tk").textContent = t + t;
+
+/* ===== Audio: jingle original sintetizado, o archivo propio ===== */
+var ctx, master, nextT = 0, on = true, vol = .5, el, started = false;
+var mel = [[392,1],[523,1],[659,1],[523,1],[587,1],[494,1],[392,2],[440,1],[523,1],[659,1],[784,2],[659,1],[587,1],[523,2]];
+function note(f, s, d, type, g){ var o = ctx.createOscillator(), a = ctx.createGain(); o.type = type; o.frequency.value = f;
+  a.gain.setValueAtTime(g, s); a.gain.exponentialRampToValueAtTime(.001, s + d); o.connect(a); a.connect(master); o.start(s); o.stop(s + d + .05); }
+function bar(){ var s = nextT, b = .24; mel.forEach(function(n, i){ note(n[0], s, n[1]*b*.9, "square", .09); s += n[1]*b; });
+  for (var i = 0; i < 16; i++) note(i % 2 ? 196 : 131, nextT + i*b*1, b*.8, "triangle", .16); nextT = s; }
+function startAudio(){
+  if (started) return; started = true;
+  if (CFG.audioSrc){ el = new Audio(CFG.audioSrc); el.loop = true; el.volume = vol; el.play().catch(function(){}); return; }
+  var AC = window.AudioContext || window.webkitAudioContext; if (!AC) return;
+  ctx = new AC(); master = ctx.createGain(); master.gain.value = vol * .6; master.connect(ctx.destination); nextT = ctx.currentTime + .1;
+  setInterval(function(){ if (ctx.state === "running") while (nextT < ctx.currentTime + 1) bar(); }, 250);
+}
+function setOn(v){ on = v; var b = $("#mute"); b.textContent = v ? "♪ Música: sí" : "♪ Música: no"; b.setAttribute("aria-pressed", v);
+  if (el){ v ? el.play().catch(function(){}) : el.pause(); } if (ctx){ v ? ctx.resume() : ctx.suspend(); } }
+function blip(){ if (!on || !ctx || ctx.state !== "running") return; note(880, ctx.currentTime, .12, "square", .08); }
+$("#mute").onclick = function(){ setOn(!on); };
+$("#vol").oninput = function(e){ vol = e.target.value / 100; if (el) el.volume = vol; if (master) master.gain.value = vol * .6; };
+document.addEventListener("click", function(e){ if (e.target.closest(".btn")) blip(); });
+
+/* ===== Entrada ===== */
+$("#enter").onclick = function(){
+  startAudio(); $("#audio").hidden = false;
+  document.body.classList.add("wipe");
+  setTimeout(function(){
+    $("#intro").classList.add("off"); $("#app").removeAttribute("inert"); window.scrollTo(0, 0);
+    document.body.classList.remove("wipe");
+    setTimeout(function(){ $("#intro").remove(); }, 600);
+  }, 750);
+};
+var io = ("IntersectionObserver" in window) ? new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } }); }, { threshold: .12 }) : null;
+document.querySelectorAll(".rv").forEach(function(n){ io ? io.observe(n) : n.classList.add("in"); });
+
+/* ===== Formulario (componente independiente) ===== */
+var f = $("#rsvpForm");
+function val(n){ var r = f.querySelector('input[name="' + n + '"]:checked'); return r ? r.value : ""; }
+function sync(){ var si = val("asiste") === "si"; $("#acomp").hidden = !si; $("#nomAcomp").hidden = !(si && val("acomp") === "si"); }
+f.addEventListener("change", sync);
+function setErr(id, m){ $("#e-" + id).textContent = m; return !m; }
+f.addEventListener("submit", function(e){
+  e.preventDefault(); var msg = $("#msg"); msg.className = ""; msg.textContent = "";
+  var nombre = $("#nombre").value.trim(), as = val("asiste"), ac = val("acomp"), na = $("#nombreAcomp").value.trim(), ok = true;
+  ok = setErr("nombre", nombre.length < 3 ? "Escribe tu nombre completo." : "") && ok;
+  ok = setErr("asiste", as ? "" : "Indica si asistirás.") && ok;
+  ok = setErr("acomp", (as === "si" && !ac) ? "Indica si llevarás acompañante." : "") && ok;
+  ok = setErr("nombreAcomp", (as === "si" && ac === "si" && na.length < 3) ? "Escribe el nombre de tu acompañante." : "") && ok;
+  if (!ok){ msg.className = "bad"; msg.textContent = "Tu declaración tiene errores. Revísala y vuelve a enviarla."; return; }
+  var rec = { nombre: nombre, asiste: as === "si", acompanante: as === "si" && ac === "si", nombreAcompanante: (as === "si" && ac === "si") ? na : null, comentarios: $("#coment").value.trim() };
+  RsvpService.save(rec).then(function(r){
+    msg.className = "ok";
+    msg.textContent = (rec.asiste ? "¡Declaración recibida, " + nombre + "! Te esperamos el sábado 5 de diciembre a las 3:00 PM." : "Declaración recibida, " + nombre + ". Lamentamos que no puedas asistir.") + "";
+  }).catch(function(){ msg.className="bad"; msg.textContent="No se pudo enviar tu declaración. Intenta de nuevo en un momento."; });
+});
+</script>
+</body>
+</html>
